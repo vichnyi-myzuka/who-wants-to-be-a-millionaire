@@ -1,0 +1,21 @@
+@use "@/styles/media.scss" as *;
+
+@mixin fullScreen {
+  width: 100vw;
+  height: 100svh;
+  position: relative;
+
+  :global(.container) {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 24px;
+    padding-top: 80px;
+
+    @include desktop {
+      flex-direction: row;
+      gap: 32px;
+      padding-top: 230px;
+    }
+  }
+}

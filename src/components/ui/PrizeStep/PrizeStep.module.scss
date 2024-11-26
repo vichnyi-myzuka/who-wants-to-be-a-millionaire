@@ -1,0 +1,63 @@
+.prizeStep {
+  &__Wrapper {
+    --border-color: var(--black-40);
+    --text-color: var(--black-100);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+
+    &::before,
+    &::after {
+      content: "";
+      display: block;
+      width: 100%;
+      height: 1px;
+      background-color: var(--border-color);
+    }
+
+    &.active {
+      --border-color: var(--orange-100);
+      --text-color: var(--orange-100);
+    }
+
+    &.disabled {
+      --border-color: var(--black-40);
+      --text-color: var(--black-40);
+    }
+  }
+
+  padding: 8px 24px;
+  border: none;
+  min-width: 0;
+  width: 100%;
+  max-width: 240px;
+  background-color: transparent;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0.4;
+  border-radius: 55px;
+  color: var(--text-color);
+  text-align: center;
+  text-overflow: ellipsis;
+
+  &__Border {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    z-index: -1;
+
+    path {
+      stroke: var(--border-color);
+      fill: transparent;
+      stroke-width: 1px;
+    }
+  }
+}

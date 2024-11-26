@@ -1,0 +1,43 @@
+@use "@/styles/media.scss" as *;
+@use "@/styles/mixins.scss" as *;
+
+.gameOverScreen {
+  @include fullScreen;
+
+  &__Image {
+    display: block;
+    max-width: 320px;
+    width: 100%;
+    height: auto;
+
+    @include desktop {
+      max-width: 640px;
+    }
+  }
+
+  &__Label {
+    text-align: center;
+    color: var(--black-100);
+    opacity: 0.5;
+    margin-bottom: 8px;
+
+    @include desktop {
+      text-align: left;
+    }
+  }
+
+  &__Score {
+    text-align: center;
+    margin-bottom: 100px;
+
+    @include desktop {
+      text-align: left;
+      margin-bottom: 64px;
+    }
+  }
+
+  &__Button {
+    max-width: 280px;
+    width: 100%;
+  }
+}
