@@ -2,7 +2,6 @@
 
 @mixin fullScreen {
   width: 100vw;
-  height: 100svh;
   position: relative;
 
   :global(.container) {

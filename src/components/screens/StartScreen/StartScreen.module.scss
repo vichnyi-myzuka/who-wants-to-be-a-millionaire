@@ -7,10 +7,11 @@
   &::before {
     position: absolute;
     content: "";
-    border-top: 100vh solid transparent;
+    border-top: 100svh solid transparent;
     border-right: 100vw solid var(--orange-5);
     z-index: -1;
     width: 0;
+    height: 100%;
   }
 
   &__Image {

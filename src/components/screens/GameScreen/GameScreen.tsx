@@ -39,6 +39,11 @@ export default function GameScreen() {
           />
         </aside>
       </div>
+      <style jsx global>{`
+        body {
+          background-color: var(--black-5);
+        }
+      `}</style>
     </div>
   );
 }

@@ -3,7 +3,6 @@ import classNames from "classnames";
 import AnswerButton from "@/components/ui/AnswerButton";
 import { getEnglishAlphabetLetter } from "@/utils";
 import React, { useEffect, useState } from "react";
-import Button from "@/components/ui/Button";
 import type { AnswerButtonProps } from "@/components/ui/AnswerButton/AnswerButton";
 import s from "./QuestionAnswersSection.module.scss";
 
@@ -11,28 +10,33 @@ const QuestionAnswersSection = function () {
   const { history, submitChoice, state } = useGame();
   const { answers, question } = history.currentQuestion;
   const [userAnswers, setUserAnswers] = useState<string[]>([]);
-  const [chose, setChose] = useState(false);
+  const [checked, setChecked] = useState(false);
 
-  const disabled = chose || userAnswers.length === 0;
-
-  const toggleAnswer = (answer: string) => {
-    if (chose) return;
-
-    if (userAnswers.includes(answer)) {
-      setUserAnswers(userAnswers.filter((a) => a !== answer));
-    } else {
-      setUserAnswers([...userAnswers, answer]);
-    }
+  const checkAnswers = (answers: string[]) => {
+    setChecked(true);
+    submitChoice(answers);
   };
 
-  const handleSubmitButtonClick = () => {
-    setChose(true);
-    submitChoice(userAnswers);
+  const toggleAnswer = (answer: string) => {
+    if (checked) return;
+
+    let newAnswers: string[];
+
+    if (userAnswers.includes(answer)) {
+      newAnswers = userAnswers.filter((a) => a !== answer);
+    } else {
+      newAnswers = [...userAnswers, answer];
+    }
+
+    setUserAnswers(newAnswers);
+    if (newAnswers.length === history.currentQuestion.correctAnswers.length) {
+      checkAnswers(newAnswers);
+    }
   };
 
   const getAnswerState = (answer: string): AnswerButtonProps["state"] => {
     const userDontChooseCorrectAnswer =
-      chose &&
+      checked &&
       !userAnswers.includes(answer) &&
       history.currentQuestion.correctAnswers.includes(answer);
 
@@ -41,7 +45,7 @@ const QuestionAnswersSection = function () {
     }
 
     const userChooseCorrectAnswer =
-      chose &&
+      checked &&
       history.currentQuestion.correctAnswers.includes(answer) &&
       userAnswers.includes(answer);
 
@@ -50,7 +54,7 @@ const QuestionAnswersSection = function () {
     }
 
     const userChoseWrongAnswer =
-      chose &&
+      checked &&
       userAnswers.includes(answer) &&
       !history.currentQuestion.correctAnswers.includes(answer);
 
@@ -64,7 +68,7 @@ const QuestionAnswersSection = function () {
   };
 
   const resetSection = () => {
-    setChose(false);
+    setChecked(false);
     setUserAnswers([]);
   };
 
@@ -93,13 +97,6 @@ const QuestionAnswersSection = function () {
           </li>
         ))}
       </ul>
-      <Button
-        onClick={handleSubmitButtonClick}
-        disabled={disabled}
-        className={s.questionAnswersSection__SubmitButton}
-      >
-        Submit
-      </Button>
     </section>
   );
 };

@@ -33,7 +33,10 @@
   &.correctNotSelected {
     --border-color: var(--green-100);
     --fill-color: var(--green-5);
-    animation: pulsating 0.75s infinite;
+
+    .answerButton__Inner {
+      animation: pulsating 0.75s infinite;
+    }
   }
 
   &.wrong {

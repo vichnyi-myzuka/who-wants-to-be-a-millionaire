@@ -56,15 +56,4 @@
       width: 100%;
     }
   }
-
-  &__SubmitButton {
-    max-width: 280px;
-    width: 100%;
-    align-self: center;
-
-    @include desktop {
-      max-width: 840px;
-      align-self: flex-start;
-    }
-  }
 }
