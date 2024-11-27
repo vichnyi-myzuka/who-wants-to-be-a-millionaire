@@ -11,7 +11,7 @@ export const compareArrays = <T>(a: T[], b: T[]) => {
   const bSorted = b.slice().sort();
 
   return (
-    aSorted.length === aSorted.length &&
+    aSorted.length === bSorted.length &&
     aSorted.every((element, index) => {
       console.log(element, bSorted[index]);
       return element === bSorted[index];
