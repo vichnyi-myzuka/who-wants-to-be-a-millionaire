@@ -25,7 +25,7 @@ const QuestionAnswersSection = function () {
     }
   };
 
-  const choose = () => {
+  const handleSubmitButtonClick = () => {
     setChose(true);
     submitChoice(userAnswers);
   };
@@ -94,7 +94,7 @@ const QuestionAnswersSection = function () {
         ))}
       </ul>
       <Button
-        onClick={choose}
+        onClick={handleSubmitButtonClick}
         disabled={disabled}
         className={s.questionAnswersSection__SubmitButton}
       >
