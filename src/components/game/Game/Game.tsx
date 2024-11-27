@@ -15,7 +15,7 @@ interface GameProps {
 }
 
 export default function Game({ config }: GameProps) {
-  const [state, setState] = useState<GameState>(GameState.STARTED);
+  const [state, setState] = useState<GameState>(GameState.NOT_STARTED);
 
   const { success, error } = useMemo(() => {
     return validateConfig(config);
@@ -45,7 +45,6 @@ export default function Game({ config }: GameProps) {
     }
 
     setState(GameState.STARTED);
-    history.goToNextQuestion();
   };
 
   const endGame = () => {
@@ -58,12 +57,12 @@ export default function Game({ config }: GameProps) {
     history.resetHistory();
   };
 
-  const submitChoice = (answers: string[]) => {
+  const submitChoice = (answer: string) => {
     if (state !== GameState.STARTED) {
       throw new Error("Game is not started! You can't submit an answer!.");
     }
 
-    const { correct, correctAnswers, prize } = history.addAnswer(answers);
+    const { correct, correctAnswers, prize } = history.addAnswer(answer);
 
     if (!correct || !history.canGoForward) {
       planAction(endGame);

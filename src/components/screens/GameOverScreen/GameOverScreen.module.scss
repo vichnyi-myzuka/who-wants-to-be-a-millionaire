@@ -16,10 +16,10 @@
   }
 
   &__Label {
-    text-align: center;
-    color: var(--black-100);
     opacity: 0.5;
     margin-bottom: 8px;
+    color: var(--black-100);
+    text-align: center;
 
     @include desktop {
       text-align: left;
@@ -27,17 +27,17 @@
   }
 
   &__Score {
-    text-align: center;
     margin-bottom: 100px;
+    text-align: center;
 
     @include desktop {
-      text-align: left;
       margin-bottom: 64px;
+      text-align: left;
     }
   }
 
   &__Button {
-    max-width: 280px;
     width: 100%;
+    max-width: 280px;
   }
 }

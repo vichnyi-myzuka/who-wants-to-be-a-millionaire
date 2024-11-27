@@ -5,6 +5,7 @@ h1,
   font-size: 32px;
   font-weight: 600;
   line-height: 37px;
+  color: var(--black-100);
 
   @include desktop {
     font-size: 56px;
@@ -15,6 +16,7 @@ h1,
 .subTitle {
   font-size: 18px;
   font-weight: 600;
+  color: var(--black-100);
 
   @include desktop {
     font-size: 32px;
@@ -26,6 +28,7 @@ h1,
   font-size: 14px;
   font-weight: 600;
   line-height: 16px;
+  color: var(--black-100);
 
   @include desktop {
     font-size: 20px;
@@ -37,6 +40,7 @@ h1,
   font-size: 14px;
   font-weight: 400;
   line-height: 16px;
+  color: var(--black-100);
 
   @include desktop {
     font-size: 20px;

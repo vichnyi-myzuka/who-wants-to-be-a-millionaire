@@ -1,0 +1,91 @@
+@use "@/styles/media.scss" as *;
+
+.answerButton {
+  --border-color: var(--black-40);
+  --fill-color: var(--white-100);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  border: 0;
+  background-color: transparent;
+  z-index: 0;
+  padding: 0;
+  cursor: pointer;
+
+  &.selected {
+    --border-color: var(--orange-100);
+    --fill-color: var(--orange-5);
+  }
+
+  &.correct {
+    --border-color: var(--green-100);
+    --fill-color: var(--green-5);
+  }
+
+  &.wrong {
+    --border-color: var(--red-100);
+    --fill-color: var(--red-5);
+  }
+
+  @include desktop {
+    &:hover:not(.selected):not(.correct):not(.wrong) {
+      --border-color: var(--orange-100);
+    }
+  }
+
+  &::before,
+  &::after {
+    content: "";
+    display: block;
+    width: 17px;
+    height: 1px;
+    background-color: var(--border-color);
+  }
+
+  &__Inner {
+    padding: 20px 24px;
+    border: none;
+    min-width: 0;
+    width: 100%;
+    max-width: 280px;
+    background-color: transparent;
+    position: relative;
+    border: none;
+    text-overflow: ellipsis;
+    color: var(--black-100);
+    text-align: left;
+    display: flex;
+    gap: 8px;
+
+    @include desktop {
+      padding: 24.5px 32px;
+      max-width: 420px;
+    }
+  }
+
+  &__Border {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    z-index: -1;
+
+    path {
+      stroke: var(--border-color);
+      fill: var(--fill-color);
+      stroke-width: 1px;
+      transition:
+        stroke 0.3s ease,
+        fill 0.3s ease;
+    }
+  }
+
+  &__Letter {
+    font-weight: 600;
+    color: var(--orange-100);
+  }
+}

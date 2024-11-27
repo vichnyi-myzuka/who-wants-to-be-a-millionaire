@@ -14,5 +14,5 @@ export interface GameInstance {
   startGame: () => void;
   restartGame: () => void;
   endGame: () => void;
-  submitChoice: (answers: string[]) => void;
+  submitChoice: (answer: string) => void;
 }

@@ -1,4 +1,4 @@
-@import "@/styles/media.scss";
+@use "@/styles/media.scss" as *;
 
 .button {
   border: none;

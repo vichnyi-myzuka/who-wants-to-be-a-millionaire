@@ -1,4 +1,20 @@
 .prizeStep {
+  padding: 8px 24px;
+  border: none;
+  min-width: 0;
+  width: 100%;
+  max-width: 240px;
+  background-color: transparent;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0.3;
+  border-radius: 55px;
+  color: var(--text-color);
+  text-align: center;
+  text-overflow: ellipsis;
+
   &__Wrapper {
     --border-color: var(--black-40);
     --text-color: var(--black-100);
@@ -29,22 +45,6 @@
     }
   }
 
-  padding: 8px 24px;
-  border: none;
-  min-width: 0;
-  width: 100%;
-  max-width: 240px;
-  background-color: transparent;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-shrink: 0.4;
-  border-radius: 55px;
-  color: var(--text-color);
-  text-align: center;
-  text-overflow: ellipsis;
-
   &__Border {
     position: absolute;
     left: 0;
@@ -56,7 +56,7 @@
 
     path {
       stroke: var(--border-color);
-      fill: transparent;
+      fill: var(--white-100);
       stroke-width: 1px;
     }
   }

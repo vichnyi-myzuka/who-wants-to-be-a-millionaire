@@ -21,16 +21,13 @@ export const useHistory = (questions: Question[]): GameHistory => {
     return false;
   };
 
-  const addAnswer = (userAnswers: string[]): SubmitChoiceResult => {
+  const addAnswer = (userAnswer: string): SubmitChoiceResult => {
     const userChoice: UserChoice = {
       questionIndex: currentQuestionIndex,
-      answers: userAnswers,
+      answer: userAnswer,
     };
 
-    const areAnswersCorrect = currentQuestion.answers.every((answer) =>
-      userAnswers.includes(answer),
-    );
-
+    const areAnswersCorrect = currentQuestion.answers.includes(userAnswer);
     setAnswers([...answers, userChoice]);
     return {
       correct: areAnswersCorrect,
