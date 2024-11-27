@@ -1,9 +1,9 @@
-import Image from "next/image";
 import Button from "@/components/ui/Button/Button";
 import s from "./GameOverScreen.module.scss";
 import { useGame } from "@/hooks/useGame";
 import classNames from "classnames";
 import { formatPrize } from "@/utils";
+import Hand from "@/components/ui/Hand";
 
 export default function GameOverScreen() {
   const { restartGame, score } = useGame();
@@ -11,13 +11,7 @@ export default function GameOverScreen() {
   return (
     <div className={s.gameOverScreen}>
       <div className="container">
-        <Image
-          className={s.gameOverScreen__Image}
-          src="/hand.svg"
-          alt="logo"
-          width={200}
-          height={200}
-        />
+        <Hand className={s.gameOverScreen__Image} />
         <div className={s.gameOverScreen__Content}>
           <span className={classNames("subTitle", s.gameOverScreen__Label)}>
             Total score:

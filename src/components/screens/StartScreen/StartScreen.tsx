@@ -1,7 +1,7 @@
-import Image from "next/image";
 import Button from "@/components/ui/Button/Button";
 import s from "./StartScreen.module.scss";
 import { useGame } from "@/hooks/useGame";
+import Hand from "@/components/ui/Hand/Hand";
 
 export default function StartScreen() {
   const { startGame } = useGame();
@@ -9,13 +9,7 @@ export default function StartScreen() {
   return (
     <div className={s.startScreen}>
       <div className="container">
-        <Image
-          className={s.startScreen__Image}
-          src="/hand.svg"
-          alt="logo"
-          width={200}
-          height={200}
-        />
+        <Hand className={s.startScreen__Image} />
         <div className={s.startScreen__Content}>
           <h1 className={s.startScreen__Title}>
             Who wants to be a millionaire?
