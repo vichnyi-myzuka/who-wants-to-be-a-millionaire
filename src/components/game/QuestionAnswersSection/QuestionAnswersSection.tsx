@@ -4,8 +4,8 @@ import AnswerButton from "@/components/ui/AnswerButton";
 import { getEnglishAlphabetLetter } from "@/utils";
 import React, { useEffect, useState } from "react";
 import Button from "@/components/ui/Button";
-import s from "./QuestionAnswersSection.module.scss";
 import type { AnswerButtonProps } from "@/components/ui/AnswerButton/AnswerButton";
+import s from "./QuestionAnswersSection.module.scss";
 
 const QuestionAnswersSection = function () {
   const { history, submitChoice, state } = useGame();
@@ -81,12 +81,12 @@ const QuestionAnswersSection = function () {
       </h2>
       <ul className={s.questionAnswersSection__Answers}>
         {answers.map((answer, index) => (
-          <li key={index}>
+          <li key={index} className={s.questionAnswersSection__Answer}>
             <AnswerButton
               state={getAnswerState(answer)}
               answerLetter={getEnglishAlphabetLetter(index)}
-              className={s.questionAnswersSection__Answer}
               onClick={() => toggleAnswer(answer)}
+              className={s.questionAnswersSection__Answer__Button}
             >
               {answer}
             </AnswerButton>
