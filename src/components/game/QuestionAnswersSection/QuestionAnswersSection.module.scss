@@ -50,6 +50,10 @@
     width: 100%;
     max-width: 300px;
 
+    @include desktop {
+      max-width: unset;
+    }
+
     &__Button {
       width: 100%;
     }
