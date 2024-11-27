@@ -4,10 +4,11 @@ import type {
   UserChoice,
 } from "@/types/history";
 import type { Question } from "@/types/question";
+import { compareArrays } from "@/utils";
 import { useState } from "react";
 
 export const useHistory = (questions: Question[]): GameHistory => {
-  const [answers, setAnswers] = useState<UserChoice[]>([]);
+  const [choices, setChoices] = useState<UserChoice[]>([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const currentQuestion = questions[currentQuestionIndex];
 
@@ -21,14 +22,18 @@ export const useHistory = (questions: Question[]): GameHistory => {
     return false;
   };
 
-  const addAnswer = (userAnswer: string): SubmitChoiceResult => {
+  const addAnswer = (userAnswers: string[]): SubmitChoiceResult => {
     const userChoice: UserChoice = {
       questionIndex: currentQuestionIndex,
-      answer: userAnswer,
+      answers: userAnswers,
     };
 
-    const areAnswersCorrect = currentQuestion.answers.includes(userAnswer);
-    setAnswers([...answers, userChoice]);
+    const areAnswersCorrect = compareArrays(
+      currentQuestion.correctAnswers,
+      userAnswers,
+    );
+
+    setChoices([...choices, userChoice]);
     return {
       correct: areAnswersCorrect,
       correctAnswers: currentQuestion.answers,
@@ -37,7 +42,7 @@ export const useHistory = (questions: Question[]): GameHistory => {
   };
 
   const resetHistory = () => {
-    setAnswers([]);
+    setChoices([]);
     setCurrentQuestionIndex(0);
   };
 
@@ -45,7 +50,7 @@ export const useHistory = (questions: Question[]): GameHistory => {
     questions,
     currentQuestionIndex,
     currentQuestion,
-    answers,
+    choices,
     canGoForward,
     goToNextQuestion,
     addAnswer,

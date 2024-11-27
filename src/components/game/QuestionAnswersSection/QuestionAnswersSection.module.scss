@@ -30,6 +30,7 @@
     flex-direction: column;
     gap: 8px;
     margin: 0;
+    margin-bottom: 32px;
     padding: 0;
     list-style: none;
 
@@ -46,5 +47,16 @@
 
   &__Answer {
     width: 100%;
+  }
+
+  &__SubmitButton {
+    max-width: 280px;
+    width: 100%;
+    align-self: center;
+
+    @include desktop {
+      max-width: 840px;
+      align-self: flex-start;
+    }
   }
 }

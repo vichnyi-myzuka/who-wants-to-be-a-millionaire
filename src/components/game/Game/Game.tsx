@@ -44,6 +44,9 @@ export default function Game({ config }: GameProps) {
       throw new Error("Game is already started! You can't start it again.");
     }
 
+    resetScore();
+    history.resetHistory();
+
     setState(GameState.STARTED);
   };
 
@@ -53,19 +56,22 @@ export default function Game({ config }: GameProps) {
 
   const restartGame = () => {
     setState(GameState.NOT_STARTED);
-    resetScore();
-    history.resetHistory();
   };
 
-  const submitChoice = (answer: string) => {
+  const submitChoice = (answers: string[]) => {
     if (state !== GameState.STARTED) {
       throw new Error("Game is not started! You can't submit an answer!.");
     }
 
-    const { correct, correctAnswers, prize } = history.addAnswer(answer);
+    const { correct, correctAnswers, prize } = history.addAnswer(answers);
 
-    if (!correct || !history.canGoForward) {
+    if (!correct) {
       planAction(endGame);
+    } else if (!history.canGoForward) {
+      planAction(() => {
+        updateScore(prize);
+        endGame();
+      });
     } else {
       planAction(() => {
         updateScore(prize);

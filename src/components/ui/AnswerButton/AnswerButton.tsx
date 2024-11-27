@@ -1,22 +1,40 @@
 import type { ButtonHTMLAttributes } from "react";
 import s from "./AnswerButton.module.scss";
 import classNames from "classnames";
+import React from "react";
 
-interface AnswerButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface AnswerButtonProps
+  extends ButtonHTMLAttributes<HTMLButtonElement> {
   answerLetter: string;
+  state?:
+    | "inactive"
+    | "selected"
+    | "correct"
+    | "wrong"
+    | "correct-not-selected";
 }
 
-export default function AnswerButton({
+const AnswerButton = function ({
   children,
   onClick,
   className,
+  state = "inactive",
   answerLetter,
   ...rest
 }: AnswerButtonProps) {
   return (
     <button
       {...rest}
-      className={classNames(s.answerButton, className)}
+      className={classNames(
+        s.answerButton,
+        {
+          [s.selected]: state === "selected",
+          [s.correctNotSelected]: state === "correct-not-selected",
+          [s.correct]: state === "correct",
+          [s.wrong]: state === "wrong",
+        },
+        className,
+      )}
       onClick={onClick}
     >
       <span className={classNames("bodyText", s.answerButton__Inner)}>
@@ -37,4 +55,6 @@ export default function AnswerButton({
       </span>
     </button>
   );
-}
+};
+
+export default React.memo(AnswerButton);

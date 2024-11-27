@@ -2,11 +2,75 @@ import { useGame } from "@/hooks/useGame";
 import classNames from "classnames";
 import AnswerButton from "@/components/ui/AnswerButton";
 import { getEnglishAlphabetLetter } from "@/utils";
+import React, { useEffect, useState } from "react";
+import Button from "@/components/ui/Button";
 import s from "./QuestionAnswersSection.module.scss";
+import type { AnswerButtonProps } from "@/components/ui/AnswerButton/AnswerButton";
 
-export default function QuestionAnswersSection() {
-  const { history } = useGame();
+const QuestionAnswersSection = function () {
+  const { history, submitChoice, state } = useGame();
   const { answers, question } = history.currentQuestion;
+  const [userAnswers, setUserAnswers] = useState<string[]>([]);
+  const [chose, setChose] = useState(false);
+
+  const disabled = chose || userAnswers.length === 0;
+
+  const toggleAnswer = (answer: string) => {
+    if (chose) return;
+
+    if (userAnswers.includes(answer)) {
+      setUserAnswers(userAnswers.filter((a) => a !== answer));
+    } else {
+      setUserAnswers([...userAnswers, answer]);
+    }
+  };
+
+  const choose = () => {
+    setChose(true);
+    submitChoice(userAnswers);
+  };
+
+  const getAnswerState = (answer: string): AnswerButtonProps["state"] => {
+    const userDontChooseCorrectAnswer =
+      chose &&
+      !userAnswers.includes(answer) &&
+      history.currentQuestion.correctAnswers.includes(answer);
+
+    if (userDontChooseCorrectAnswer) {
+      return "correct-not-selected";
+    }
+
+    const userChooseCorrectAnswer =
+      chose &&
+      history.currentQuestion.correctAnswers.includes(answer) &&
+      userAnswers.includes(answer);
+
+    if (userChooseCorrectAnswer) {
+      return "correct";
+    }
+
+    const userChoseWrongAnswer =
+      chose &&
+      userAnswers.includes(answer) &&
+      !history.currentQuestion.correctAnswers.includes(answer);
+
+    if (userChoseWrongAnswer) {
+      return "wrong";
+    }
+
+    if (userAnswers.includes(answer)) {
+      return "selected";
+    }
+  };
+
+  const resetSection = () => {
+    setChose(false);
+    setUserAnswers([]);
+  };
+
+  useEffect(() => {
+    resetSection();
+  }, [question, state]);
 
   return (
     <section className={s.questionAnswersSection}>
@@ -17,16 +81,27 @@ export default function QuestionAnswersSection() {
       </h2>
       <ul className={s.questionAnswersSection__Answers}>
         {answers.map((answer, index) => (
-          <li key={answer}>
+          <li key={index}>
             <AnswerButton
+              state={getAnswerState(answer)}
               answerLetter={getEnglishAlphabetLetter(index)}
               className={s.questionAnswersSection__Answer}
+              onClick={() => toggleAnswer(answer)}
             >
               {answer}
             </AnswerButton>
           </li>
         ))}
       </ul>
+      <Button
+        onClick={choose}
+        disabled={disabled}
+        className={s.questionAnswersSection__SubmitButton}
+      >
+        Submit
+      </Button>
     </section>
   );
-}
+};
+
+export default React.memo(QuestionAnswersSection);

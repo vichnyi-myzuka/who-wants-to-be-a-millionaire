@@ -2,7 +2,7 @@ import type { Question } from "./question";
 
 export interface UserChoice {
   questionIndex: number;
-  answer: string;
+  answers: string[];
 }
 
 export interface SubmitChoiceResult {
@@ -15,9 +15,9 @@ export interface GameHistory {
   questions: Question[];
   currentQuestionIndex: number;
   currentQuestion: Question;
-  answers: UserChoice[];
+  choices: UserChoice[];
   canGoForward: boolean;
   goToNextQuestion: () => void;
-  addAnswer: (answer: string) => SubmitChoiceResult;
+  addAnswer: (answers: string[]) => SubmitChoiceResult;
   resetHistory: () => void;
 }
