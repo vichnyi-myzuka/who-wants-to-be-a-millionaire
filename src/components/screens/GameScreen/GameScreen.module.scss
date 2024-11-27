@@ -3,10 +3,14 @@
 .gameScreen {
   position: relative;
   width: 100vw;
-  height: 100svh;
   overflow: hidden;
   background-color: var(--black-5);
   z-index: 1;
+
+  @include desktop {
+    height: 100svh;
+    overflow-y: auto;
+  }
 
   :global(.container) {
     height: 100%;
