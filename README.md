@@ -37,4 +37,4 @@ npm run lint
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-The project also is deployed to Vercel, so you can see it [here](https://who-wants-to-be-a-millionaire-lovat.vercel.app/).
+The project is also deployed to Vercel, so you can see it [here](https://who-wants-to-be-a-millionaire-lovat.vercel.app/).
